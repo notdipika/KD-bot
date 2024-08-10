@@ -4,6 +4,13 @@
 
 using namespace std;
 
+class ConversationManager {
+public:
+    void saveConversation(const string& username, const string& conversation);
+    void deleteConversation(const string& username);
+    void loadConversation(const string& username);
+};
+
 class UserManager {
 public:
     void login();
@@ -13,6 +20,10 @@ public:
     void showMainMenu();
     void startChat();
     void resetPassword(const string& username);
+
+private:
+    string loggedInUser;
+    ConversationManager conversationManager;
 };
 
 int main() {
@@ -66,12 +77,14 @@ void UserManager::login() {
     while (read >> id >> pass) {
         if (id == username && pass == password) {
             count = 1;
+            loggedInUser = username;
         }
     }
     read.close();
 
     if (count == 1) {
         cout << username << "\nYour login is successful \nThanks for logging in!\n";
+        conversationManager.loadConversation(username);
         startChat();
     } else {
         cout << "\nIncorrect username or password." << endl;
@@ -174,4 +187,46 @@ void UserManager::startChat() {
     system("cls");
     cout << "\t\t\t\t\t\t\t\tHi, I am KD bot" << endl;
     cout << "\t\t\t\t\t\t\t\tAsk anything to me!" << endl;
+    
+    string conversation;
+    cout << "Enter your conversation (type 'exit' to end): " << endl;
+    cin.ignore(); 
+    while (true) {
+        string line;
+        getline(cin, line);
+        if (line == "exit") break;
+        conversation += line + "\n";
+    }
+
+    conversationManager.saveConversation(loggedInUser, conversation);
+    showMainMenu();
+}
+
+void ConversationManager::saveConversation(const string& username, const string& conversation) {
+    ofstream file(username + "_conversation.txt", ios::app);
+    file << conversation << endl;
+    file.close();
+    cout << "Conversation saved successfully!" << endl;
+}
+
+void ConversationManager::deleteConversation(const string& username) {
+    if (remove((username + "_conversation.txt").c_str()) == 0) {
+        cout << "Conversation deleted successfully!" << endl;
+    } else {
+        cout << "Error deleting conversation or no conversation to delete." << endl;
+    }
+}
+
+void ConversationManager::loadConversation(const string& username) {
+    ifstream file(username + "_conversation.txt");
+    if (file.is_open()) {
+        cout << "Previous conversation loaded:\n";
+        string line;
+        while (getline(file, line)) {
+            cout << line << endl;
+        }
+        file.close();
+    } else {
+        cout << "No previous conversation found." << endl;
+    }
 }
