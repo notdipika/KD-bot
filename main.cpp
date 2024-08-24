@@ -49,16 +49,33 @@ public:
         cout << "Please enter the username and password: " << endl;
         cout << "Username: ";
         cin >> username;
+
+        // Check if username exists
+        if (!findUser(username, storedPassword)) {
+            cout << "\nUsername not found." << endl;
+            int option;
+            cout << "Press 1 to REGISTER." << endl;
+            cin >> option;
+
+            if (option == 1) {
+                registerUser();
+            } else {
+                cout << "Invalid choice. Returning to home page." << endl;
+                showMainMenu();
+            }
+            return;  // Exit after handling the user's choice
+        }
+
         cout << "Password: ";
         cin >> password;
 
-        if (findUser(username, storedPassword) && storedPassword == password) {
+        if (storedPassword == password) {
             loggedInUser = username;
             cout << username << "\nYour login is successful \nThanks for logging in!\n";
             conversationManager.loadConversation(username);
             startChat();
         } else {
-            cout << "\nIncorrect username or password." << endl;
+            cout << "\nIncorrect password." << endl;
             int option;
             cout << "Press 1 if you forgot your password." << endl;
             cout << "Press 2 to try again." << endl;
@@ -106,12 +123,15 @@ public:
         cout << "Enter your username: ";
         cin >> username;
 
-        if (findUser(username, password)) {
-            cout << "Your account is found!\n";
-            resetPassword(username);
-        } else {
-            cout << "Sorry! Your account is not found." << endl;
+        // Check if username exists
+        if (!findUser(username, password)) {
+            cout << "Sorry! Your account is not found. Returning to main menu." << endl;
+            showMainMenu();  // Return to main menu if username is not found
+            return;
         }
+
+        cout << "Your account is found!\n";
+        resetPassword(username);
     }
 
     void resetPassword(const string& username) {
