@@ -3,7 +3,6 @@
 #include <iomanip>
 using namespace std;
 
-// Addition Class
 class Addition {
 public:
     double add(double a, double b) {
@@ -11,7 +10,6 @@ public:
     }
 };
 
-// Subtraction Class
 class Subtraction {
 public:
     double subtract(double a, double b) {
@@ -19,7 +17,6 @@ public:
     }
 };
 
-// Multiplication Class
 class Multiplication {
 public:
     double multiply(double a, double b) {
@@ -27,7 +24,6 @@ public:
     }
 };
 
-// Division Class
 class Division {
 public:
     double divide(double a, double b) {
@@ -40,7 +36,6 @@ public:
     }
 };
 
-// Modulus Class
 class Modulus {
 public:
     double modulus(double a, double b) {
@@ -48,7 +43,6 @@ public:
     }
 };
 
-// Logarithm Class
 class Logarithm {
 public:
     double logarithm(double a) {
@@ -61,7 +55,6 @@ public:
     }
 };
 
-// Trigonometric Functions Classes
 class Sine {
 public:
     double sine(double a) {
@@ -83,7 +76,6 @@ public:
     }
 };
 
-// Power and Roots Classes
 class Power {
 public:
     double power(double a, double b) {
@@ -124,16 +116,33 @@ public:
     }
 };
 
-// Quadratic Solver Class
+class SolveLinear {
+public:
+    double solve(double a, double b) {
+        if (a == 0) {
+            cout << "No solution (a cannot be 0 in a linear equation)" << endl;
+            return NAN;
+        } else {
+            return -b / a;
+        }
+    }
+};
+
 class QuadraticSolver {
 public:
     pair<double, double> solve(double a, double b, double c) {
         double discriminant = b * b - 4 * a * c;
-        if (discriminant >= 0) {
+        if (discriminant > 0) {
             double root1 = (-b + sqrt(discriminant)) / (2 * a);
             double root2 = (-b - sqrt(discriminant)) / (2 * a);
             return make_pair(root1, root2);
-        } else {
+        } 
+        else if (discriminant == 0) {
+                double root = -b / (2*a);
+                cout << "Roots are real and the same.\n";
+                cout << root;
+        } 
+        else {
             cout << "Complex roots: ";
             double realPart = -b / (2 * a);
             double imaginaryPart = sqrt(-discriminant) / (2 * a);
@@ -142,7 +151,40 @@ public:
     }
 };
 
-// Cartesian to Polar Conversion Class
+class Solve2Variables {
+public:
+    void solve(double a1, double b1, double c1, double a2, double b2, double c2) {
+        double det = a1 * b2 - a2 * b1;
+        if (det == 0) {
+            cout << "No unique solution (determinant is 0)" << endl;
+        } else {
+            double x = (c1 * b2 - c2 * b1) / det;
+            double y = (a1 * c2 - a2 * c1) / det;
+            cout << "Value of x and y is : x = " << x << ", y = " << y << endl;
+        }
+    }
+};
+
+class Solve3Variables {
+public:
+    void solve(double a1, double b1, double c1, double d1,
+               double a2, double b2, double c2, double d2,
+               double a3, double b3, double c3, double d3) {
+        double det = a1 * (b2 * c3 - b3 * c2) -
+                     b1 * (a2 * c3 - a3 * c2) +
+                     c1 * (a2 * b3 - a3 * b2);
+        if (det == 0) {
+            cout << "No unique solution (determinant is 0)" << endl;
+        } else {
+            double x = (d1 * (b2 * c3 - b3 * c2) - b1 * (d2 * c3 - d3 * c2) + c1 * (d2 * b3 - d3 * b2)) / det;
+            double y = (a1 * (d2 * c3 - d3 * c2) - d1 * (a2 * c3 - a3 * c2) + c1 * (a2 * d3 - a3 * d2)) / det;
+            double z = (a1 * (b2 * d3 - b3 * d2) - b1 * (a2 * d3 - a3 * d2) + d1 * (a2 * b3 - a3 * b2)) / det;
+            cout << "Value of x, y, and z is : x = " << x << ", y = " << y << ", z = " << z << endl;
+        }
+    }
+};
+
+
 class CartesianToPolar {
 public:
     pair<double, double> convert(double x, double y) {
@@ -152,7 +194,6 @@ public:
     }
 };
 
-// Polar to Cartesian Conversion Class
 class PolarToCartesian {
 public:
     pair<double, double> convert(double r, double theta) {
@@ -162,7 +203,6 @@ public:
     }
 };
 
-// Factorial Class
 class Factorial {
 public:
     double factorial(int n) {
@@ -173,7 +213,6 @@ public:
     }
 };
 
-// Permutation Class
 class Permutation {
 public:
     double permutation(int n, int r) {
@@ -182,7 +221,6 @@ public:
     }
 };
 
-// Combination Class
 class Combination {
 public:
     double combination(int n, int r) {
@@ -191,7 +229,6 @@ public:
     }
 };
 
-// Matrix Operations Class
 class MatrixOperations {
 public:
     void addMatrices(int matrix1[2][2], int matrix2[2][2], int result[2][2]) {
@@ -226,7 +263,6 @@ public:
     }
 };
 
-// Scientific Calculator Class
 class ScientificCalculator {
 public:
     void run();
@@ -242,32 +278,49 @@ private:
 };
 
 void ScientificCalculator::showCalculator() {
-    cout << "--------------------------------------------------------------------------------------" << endl;
-    cout << "-                                            SCIENTIFIC                               -" << endl;
-    cout << "---                                          CALCULATOR                            --- " << endl;
-    cout << "-                                                                                     -" << endl;
-    cout << "----------------------------------------------------------------------------------------" << endl;
-    cout << "-        +               |             -             |           *                      -" << endl;
-    cout << "-       Add              |          Subtract         |         Multiply                 -" << endl;
-    cout << "----------------------------------------------------------------------------------------" << endl;
-    cout << "-        /               |             m             |           L                     -" << endl;
-    cout << "-     Divide            |            Mod            |          Log                    -" << endl;
-    cout << "----------------------------------------------------------------------------------------" << endl;
-    cout << "-        s               |             c             |           t                     -" << endl;
-    cout << "-       sin              |            cos            |          tan                    -" << endl;
-    cout << "----------------------------------------------------------------------------------------" << endl;
-    cout << "-        S               |              C            |           p                      -" << endl;
-    cout << "-      Square            |             Cube          |         Power                     -" << endl;
-    cout << "----------------------------------------------------------------------------------------" << endl;
-    cout << "-        r               |             k             |           .                      -" << endl;
-    cout << "-     sq root            |          Clear           |         Close                    -" << endl;
-    cout << "----------------------------------------------------------------------------------------" << endl;
-    cout << "-        q               |             P             |           A                      -" << endl;
-    cout << "-     Quadratic Solver   |  Polar to Cartesian    |  Cartesian to Polar             -" << endl;
-    cout << "----------------------------------------------------------------------------------------" << endl;
-    cout << "-        Z               |             z             |           d                      -" << endl;
-    cout << "-     Permutations       |  Combinations          |  Determinant                   -" << endl;
-    cout << "----------------------------------------------------------------------------------------" << endl;
+    // cout << "--------------------------------------------------------------------------------------" << endl;
+    // cout << "-                                            SCIENTIFIC                               -" << endl;
+    // cout << "---                                          CALCULATOR                            --- " << endl;
+    // cout << "-                                                                                     -" << endl;
+    // cout << "----------------------------------------------------------------------------------------" << endl;
+    // cout << "-        +               |             -             |           *                      -" << endl;
+    // cout << "-       Add              |          Subtract         |         Multiply                 -" << endl;
+    // cout << "----------------------------------------------------------------------------------------" << endl;
+    // cout << "-        /               |             m             |           L                     -" << endl;
+    // cout << "-     Divide            |            Mod            |          Log                    -" << endl;
+    // cout << "----------------------------------------------------------------------------------------" << endl;
+    // cout << "-        s               |             c             |           t                     -" << endl;
+    // cout << "-       sin              |            cos            |          tan                    -" << endl;
+    // cout << "----------------------------------------------------------------------------------------" << endl;
+    // cout << "-        S               |              C            |           p                      -" << endl;
+    // cout << "-      Square            |             Cube          |         Power                     -" << endl;
+    // cout << "----------------------------------------------------------------------------------------" << endl;
+    // cout << "-        r               |             k             |           .                      -" << endl;
+    // cout << "-     sq root            |          Clear           |         Close                    -" << endl;
+    // cout << "----------------------------------------------------------------------------------------" << endl;
+    // cout << "-        q               |             P             |           A                      -" << endl;
+    // cout << "-     Quadratic Solver   |  Polar to Cartesian    |  Cartesian to Polar             -" << endl;
+    // cout << "----------------------------------------------------------------------------------------" << endl;
+    // cout << "-        Z               |             z             |           d                      -" << endl;
+    // cout << "-     Permutations       |  Combinations          |  Determinant                   -" << endl;
+    // cout << "----------------------------------------------------------------------------------------" << endl;
+     cout << "\t\t---------------------------------------------------------------------------------------------------------------------" << endl;
+     cout << "\t\t-                                                                                                                  --"<< endl;
+     cout << "\t\t---                                             KDA Calculator                                                    ----"<< endl;                     
+     cout << "\t\t-                                      solve your math problem here...                                             --"<< endl;
+     cout << "\t\t---------------------------------------------------------------------------------------------------------------------" << endl;
+     cout << "\t\t-     +       |      -       |          *       |       /      |      %      |       k        |          .          |" << endl;
+     cout << "\t\t-    Add      |   Subtract   |       multiply   |     Divide   |     mod     |     clear      |        close        |" << endl;
+     cout << "\t\t---------------------------------------------------------------------------------------------------------------------" << endl;
+     cout << "\t\t-     s       |      c       |          t       |        S     |      C      |        p       |         r           |" << endl;
+     cout << "\t\t-    sin      |     cos      |         tan      |      square  |     cube    |      power     |        sqrt         |" << endl;
+     cout << "\t\t---------------------------------------------------------------------------------------------------------------------" << endl;
+     cout << "\t\t-     L       |      M       |          1       |       2      |      3      |        4       |         =            |  " << endl;
+     cout << "\t\t-    log      |   modeset    |       ax+b=0     | ax^2+bx+c=0  |  anx+bny=cn | anx+bny+cnz=dn |        Ans           |" << endl;
+     cout << "\t\t---------------------------------------------------------------------------------------------------------------------" << endl;
+     cout << "\t\t-     p       |      A       |          Z       |       Z      |      d      |        10      |         11           | "<<endl;
+     cout << "\t\t- Pol to Cart | Cart to Pol  |   Permutations   | Combinations | Determinant |                |                      | "<<endl; 
+     cout <<"\t\t-----------------------------------------------------------------------------------------------------------------------"<<endl; 
 }
 
 void ScientificCalculator::displayOutput(double answer1, double answer2) {
@@ -281,80 +334,67 @@ void ScientificCalculator::displayOutput(double answer1, double answer2) {
     cout << endl;
     cout << "---                                                                    -----------------" << endl;
     cout << "----------------------------------------------------------------------------------------" << endl;
-    showCalculator(); // Show the calculator menu again
+    showCalculator(); 
 }
 
 void ScientificCalculator::clearScreen() {
-    system("cls"); // Clear the screen (works on Windows)
+    system("cls"); 
 }
 
 void ScientificCalculator::handleOperation(char operation) {
     switch (operation) {
-        case '+': {
+        case '+':
             Addition addObj;
             answer1 = addObj.add(num1, num2);
             break;
-        }
-        case '-': {
+        case '-':
             Subtraction subObj;
             answer1 = subObj.subtract(num1, num2);
             break;
-        }
-        case '*': {
+        case '*':
             Multiplication mulObj;
             answer1 = mulObj.multiply(num1, num2);
             break;
-        }
-        case '/': {
+        case '/':
             Division divObj;
             answer1 = divObj.divide(num1, num2);
             break;
-        }
-        case 'm': {
+        case '%':
             Modulus modObj;
             answer1 = modObj.modulus(num1, num2);
             break;
-        }
-        case 'L': {
+        case 'L':
             Logarithm logObj;
             answer1 = logObj.logarithm(num1);
             break;
-        }
-        case 's': {
+        case 's':
             Sine sinObj;
             answer1 = sinObj.sine(num1);
             break;
-        }
-        case 'c': {
+        case 'c':
             Cosine cosObj;
             answer1 = cosObj.cosine(num1);
             break;
-        }
-        case 't': {
+        case 't':
             Tangent tanObj;
             answer1 = tanObj.tangent(num1);
             break;
-        }
-        case 'S': {
+        case 'S':
             Square sqObj;
             answer1 = sqObj.square(num1);
             break;
-        }
-        case 'C': {
+        case 'C':
             Cube cubeObj;
             answer1 = cubeObj.cube(num1);
             break;
-        }
-        case 'p': {
+        case 'p':
             Power powerObj;
             answer1 = powerObj.power(num1, num2);
             break;
-        }
-        case 'r': {
+        case 'r':
             SquareRoot sqrtObj;
             answer1 = sqrtObj.squareRoot(num1);
             break;
-        }
         case 'q': {
             QuadraticSolver quadSolverObj;
             tie(answer1, answer2) = quadSolverObj.solve(num1, num2, answer1); // For Quadratic Solver
@@ -383,22 +423,35 @@ void ScientificCalculator::handleOperation(char operation) {
         case 'd': {
             MatrixOperations matOpObj;
             int matrix[2][2] = {{static_cast<int>(num1), static_cast<int>(num2)}, {static_cast<int>(answer1), static_cast<int>(answer2)}};
-            answer1 = matOpObj.determinant(matrix); // For Matrix Determinant
+            answer1 = matOpObj.determinant(matrix);
             break;
         }
         case 'k': {
-            clearScreen(); // Clear the screen and show the menu again
+            clearScreen();
             showCalculator();
             break;
         }
-        case '.': {
-            exit(0); // Exit the program
+        case '1': { // Solve Linear
+            SolveLinear linearSolver;
+            answer1 = linearSolver.solve(num1, num2);
+            break;
         }
-        default: {
+        case '2': { // Solve 2 Variables
+            Solve2Variables twoVarSolver;
+            twoVarSolver.solve(num1, num2, answer1, answer2, answer1, answer2); // Adjust accordingly
+            break;
+        }
+        case '3': { // Solve 3 Variables
+            Solve3Variables threeVarSolver;
+            threeVarSolver.solve(num1, num2, answer1, answer2, answer1, answer2, answer1, answer2, answer1, answer2, answer1, answer2); // Adjust accordingly
+            break;
+        }
+        case '.':
+            exit(0);
+        default:
             cout << "Invalid Operation!" << endl;
-        }
     }
-    displayOutput(answer1, answer2); // Display the result after performing the operation
+    displayOutput(answer1, answer2);
 }
 
 void ScientificCalculator::run() {
@@ -408,7 +461,7 @@ void ScientificCalculator::run() {
         cin >> operation;
         if (operation == '.' || operation == 'k') {
             handleOperation(operation);
-            continue; // Skip the number inputs if the operation is '.' or 'k'
+            continue;
         }
 
         cout << "Enter first number: ";
@@ -417,6 +470,15 @@ void ScientificCalculator::run() {
         if (operation != 'L' && operation != 's' && operation != 'c' && operation != 't' && operation != 'S' && operation != 'C' && operation != 'r') {
             cout << "Enter second number: ";
             cin >> num2;
+        }
+
+     
+        if (operation == '2') {
+            cout << "Enter additional values for 2-variable equation: ";
+            cin >> answer1 >> answer2; 
+        } else if (operation == '3') {
+            cout << "Enter additional values for 3-variable equation: ";
+            cin >> answer1 >> answer2 >> num2 >> num1; 
         }
 
         handleOperation(operation);
