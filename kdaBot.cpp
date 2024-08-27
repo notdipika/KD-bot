@@ -196,7 +196,9 @@ public:
             while (true) {
                 cout << "Enter your message (type 'exit' to end): ";
                 getline(cin, conversation);
-                if (conversation == "exit") break;
+                if (conversation == "exit") {
+                    system("start UserManager.exe");
+                } 
                 processInput(toLowerCase(trim(conversation)));
             }
         } catch (const exception& e) {

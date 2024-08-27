@@ -2,6 +2,7 @@
 #include <fstream>
 #include <string>
 #include <stdexcept>
+#include <cstdlib> // for system()
 
 using namespace std;
 
@@ -51,7 +52,8 @@ public:
                     loggedInPassword = password;
                     cout << "Login successful!" << endl;
                     loadConversationHistory();  
-                    return;  // Exit the function after successful login
+                    system("start kdaBot.exe");
+                    return;  
                 } else {
                     attempts--;
                     if (attempts > 0) {
@@ -110,18 +112,17 @@ public:
 
 private:
     void saveCredentials() {
-        ofstream file("credentials.txt", ios::app);
+        ofstream file("users.txt", ios::app);
         if (!file) throw runtime_error("Failed to open file for saving credentials.");
-        file << loggedInUser << endl;
-        file << loggedInPassword << endl;
+        file << loggedInUser << ":" << loggedInPassword << endl;
         file.close();
     }
 
     bool checkCredentials(const string& username, const string& password) {
-        ifstream file("credentials.txt");
+        ifstream file("users.txt");
         if (!file) throw runtime_error("Failed to open file for reading credentials.");
         string savedUsername, savedPassword;
-        while (getline(file, savedUsername)) {
+        while (getline(file, savedUsername, ':')) {
             getline(file, savedPassword);
             if (username == savedUsername && password == savedPassword) {
                 return true;
@@ -131,10 +132,17 @@ private:
     }
 
     bool isUsernameTaken(const string& username) {
-        ifstream file("credentials.txt");
-        if (!file) throw runtime_error("Failed to open file for reading credentials.");
+        ifstream file("users.txt");
+
+        // Create the file if it doesn't exist
+        if (!file) {
+            ofstream newFile("users.txt");
+            newFile.close();
+            return false;  // No usernames taken yet since file was just created
+        }
+
         string savedUsername, savedPassword;
-        while (getline(file, savedUsername)) {
+        while (getline(file, savedUsername, ':')) {
             getline(file, savedPassword);
             if (username == savedUsername) {
                 return true;
@@ -153,25 +161,44 @@ int main() {
     try {
         UserManager userManager;
         while (true) {
-            cout << "1. Register" << endl;
-            cout << "2. Login" << endl;
-            cout << "3. Exit" << endl;
-            cout << "Enter your choice: ";
-            int choice;
-            cin >> choice;
-            cin.ignore();  
+            if (userManager.isUserLoggedIn()) {
+                cout << "1. Logout" << endl;
+                cout << "2. Exit" << endl;
+                cout << "Enter your choice: ";
+                int choice;
+                cin >> choice;
+                cin.ignore();
 
-            switch (choice) {
-                case 1:
-                    userManager.registerUser();
-                    break;
-                case 2:
-                    userManager.login();
-                    break;
-                case 3:
-                    return 0;
-                default:
-                    cout << "Invalid choice. Please try again." << endl;
+                switch (choice) {
+                    case 1:
+                        userManager.logout();
+                        break;
+                    case 2:
+                        return 0;
+                    default:
+                        cout << "Invalid choice. Please try again." << endl;
+                }
+            } else {
+                cout << "1. Register" << endl;
+                cout << "2. Login" << endl;
+                cout << "3. Exit" << endl;
+                cout << "Enter your choice: ";
+                int choice;
+                cin >> choice;
+                cin.ignore();  
+
+                switch (choice) {
+                    case 1:
+                        userManager.registerUser();
+                        break;
+                    case 2:
+                        userManager.login();
+                        break;
+                    case 3:
+                        return 0;
+                    default:
+                        cout << "Invalid choice. Please try again." << endl;
+                }
             }
         }
     } catch (const exception& e) {
