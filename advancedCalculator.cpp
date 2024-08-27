@@ -23,7 +23,7 @@ class heroSection{
      cout << "\t\t-  complex    |   matrix     |       ax+b=0      | ax^2+bx+c=0 |  anx+bny=cn | anx+bny+cnz=dn |        Base          |" << endl;
      cout << "\t\t---------------------------------------------------------------------------------------------------------------------" << endl;
      cout << "\t\t-     4       |      5       |          6        |       L     |      l      |        k       |         .            | "<<endl;
-     cout << "\t\t-    sin'1    |    cos'1     |        tan'1      |      log    |      ln     |      clear     |        close         | "<<endl; 
+     cout << "\t\t-    sin'1    |    cos'1     |        tan'1      |      log    |     ln      |      clear     |        close         | "<<endl; 
      cout << "\t\t-----------------------------------------------------------------------------------------------------------------------"<<endl;          
         
     }
@@ -638,7 +638,11 @@ public:
             break;
         }
         case '.':
-        cout<<"Thank you!"<<endl;
+        cout<<"press any key to EXIT"<<endl;
+        cin.ignore();
+        cin.get();
+        system("cls");
+        system(".\\KDABot");
         break;
 
          
@@ -653,7 +657,8 @@ public:
         cout<<"press any key to continue "<<endl;
         cin.ignore();
         cin.get();
-        heroSection:: introCalculator();
+        system("cls");
+       
         
         }
     }
