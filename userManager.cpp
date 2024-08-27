@@ -2,7 +2,6 @@
 #include <fstream>
 #include <string>
 #include <stdexcept>
-#include <filesystem>
 
 using namespace std;
 
@@ -96,7 +95,7 @@ public:
     void loadConversationHistory() {
         if (!isLoggedIn) return; 
         string filename = loggedInUser + "_conversation.txt";
-        if (filesystem::exists(filename)) {
+        if (fileExists(filename)) {
             ifstream file(filename);
             if (!file) throw runtime_error("Failed to open file for loading conversation history.");
             string line;
@@ -142,6 +141,11 @@ private:
             }
         }
         return false;
+    }
+
+    bool fileExists(const string& filename) {
+        ifstream file(filename);
+        return file.good();
     }
 };
 
