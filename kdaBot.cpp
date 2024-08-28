@@ -3,7 +3,6 @@
 #include <iomanip>
 #include <string>
 #include <ctime>
-#include <chrono>
 #include <cstdlib>
 #include <unordered_map>
 #include <stdexcept>
@@ -12,18 +11,25 @@
 
 using namespace std;
 
+    const string RESET = "\033[0m";
+    const string RED = "\033[31m";
+    const string GREEN = "\033[32m";
+    const string YELLOW = "\033[33m";
+    const string BLUE = "\033[34m";
+    const string MAGENTA = "\033[35m";
+    const string CYAN = "\033[36m";
+    const string WHITE = "\033[37m";
+    const string BOLD = "\033[1m";
+    const string UNDERLINE = "\033[4m";
+
+
 class TimeBot {
 public:
     void tellTime() {
-        try {
-            auto now = chrono::system_clock::now();
-            auto time = chrono::system_clock::to_time_t(now);
-            auto localTime = localtime(&time);
-            if (!localTime) throw runtime_error("Failed to get local time.");
-            cout << "Current time is: " << put_time(localTime, "%H:%M:%S") << endl;
-        } catch (const runtime_error& e) {
-            cout << "Error: " << e.what() << endl;
-        }
+        time_t now = time(0);
+        tm *ltm = localtime(&now);
+        cout << "Current time : " << setfill('0') << setw(2) << ltm->tm_hour << ":"
+             << setfill('0') << setw(2) << ltm->tm_min << ":" << setfill('0') << setw(2) << ltm->tm_sec << endl;
     }
 };
 
@@ -33,6 +39,7 @@ public:
         try {
             string command = "start https://www.google.com/maps/search/" + location;
             if (system(command.c_str()) != 0) throw runtime_error("Failed to open Google Maps.");
+            cout << "Google Maps opened for " << location << endl;
         } catch (const runtime_error& e) {
             cout << "Error: " << e.what() << endl;
         }
@@ -46,12 +53,16 @@ public:
             string command;
             if (appName == "notepad") {
                 command = "notepad.exe";
+                cout<< "Opened Notepad" << endl;
             } else if (appName == "word") {
                 command = "start winword.exe";
+                cout<< "Opened Word" << endl;
             } else if (appName == "excel") {
                 command = "start excel.exe";
+                cout<< "Opened Excel" << endl;
             } else if (appName == "powerpoint") {
                 command = "start powerpnt.exe";
+                cout<< "Opened PowerPoint" << endl;
             } else {
                 throw invalid_argument("Application not recognized.");
             }
@@ -68,9 +79,11 @@ public:
         try {
             string command;
             if (mediaType == "song") {
-                command = "start yourMusicPlayer.exe"; 
+                command = "start https://open.spotify.com/"; 
+                cout<< "Opened Spotify" << endl;
             } else if (mediaType == "video") {
-                command = "start yourVideoPlayer.exe"; 
+                command = "start https://www.youtube.com/";
+                cout<< "Opened YouTube" << endl;
             } else {
                 throw invalid_argument("Media type not recognized.");
             }
@@ -186,15 +199,26 @@ class ChatBot {
     vector<string> chatHistory;
 
 public:
-    void startChat() {
+    void startChat(const string& loggedInUser) {
         try {
             system("cls");
-            greetUser();
-            handleUserMood();
+            
+            cout << "\t\t\t\t\t\t" << CYAN << "*************************************************************" << RESET << endl;
+            cout << "\t\t\t\t\t\t" << CYAN << "*                                                           *" << RESET << endl;
+            cout << "\t\t\t\t\t\t" << CYAN << "*             " << BLUE << BOLD << "        Hi, I am KDA bot" << CYAN << "                      *" << RESET << endl;
+            cout << "\t\t\t\t\t\t" << CYAN << "*" << BLUE << BOLD << "                       Hello, " + string(loggedInUser) << CYAN << " !                     *" << RESET << endl;
+            cout << "\t\t\t\t\t\t" << CYAN << "*                                                           *" << RESET << endl;
+            cout << "\t\t\t\t\t\t" << CYAN << "*************************************************************" << RESET << endl;
 
+        time_t now = time(0);
+        tm *ltm = localtime(&now);
+        cout << "Today's date : " << 1900 + ltm->tm_year << "-" 
+             << setfill('0') << setw(2) << 1 + ltm->tm_mon << "-" 
+             << setfill('0') << setw(2) << ltm->tm_mday << "                                                                                                           Type 'exit' to end "<< endl;
+        
+        handleUserMood();
             string conversation;
             while (true) {
-                cout << "Enter your message (type 'exit' to end): ";
                 getline(cin, conversation);
                 if (conversation == "exit") {
                 cout << "Goodbye! Have a great day!" << endl;
@@ -209,19 +233,64 @@ public:
     }
 
 private:
-    void greetUser() {
-        cout << "Hi, how are you feeling today?" << endl;
-    }
-
     void handleUserMood() {
-        string mood;
-        getline(cin, mood);
-        string lowerMood = toLowerCase(trim(mood));
-        if (lowerMood.find("sad") != string::npos || lowerMood.find("bad") != string::npos || lowerMood.find("off") != string::npos) {
-            cout << "I'm sorry to hear that. Would you like to listen to a song, watch a video, hear a joke, a riddle, or play some games? (song/video/joke/riddle/games)" << endl;
-        } else if (lowerMood.find("happy") != string::npos || lowerMood.find("good") != string::npos || lowerMood.find("great") != string::npos) {
-            cout << "That's great! Do you have any work for me? (yes/no)" << endl;
-        }
+    string greet;
+    getline(cin, greet);
+    if (greet.find("Hi") != string::npos || 
+        greet.find("Hello") != string::npos || 
+        greet.find("hii") != string::npos || 
+        greet.find("Hlo") != string::npos  || 
+        greet.find("Hello") != string::npos || 
+        greet.find("hii") != string::npos ){
+            cout << "How are you feeling today? " << endl;
+            string response;
+            transform(response.begin(), response.end(), response.begin(), ::tolower);
+            getline(cin, response);
+            if(response.find("good") != string::npos || 
+            response.find("great") != string::npos || 
+            response.find("happy") != string::npos || 
+            response.find("nice") != string::npos) {
+            cout << "That's great! Thank you for sharing. Do you have any work for me?" << endl;
+            } else if (response.find("sad") != string::npos || 
+                 response.find("bad") != string::npos || 
+                 response.find("off") != string::npos || 
+                 response.find("not good") != string::npos) {
+            cout << "I'm sorry to hear that. Would you like to hear a joke, try a riddle, play some games, listen to songs, or watch some videos? : ";
+            string choice;
+            getline(cin, choice);
+            transform(choice.begin(), choice.end(), choice.begin(), ::tolower);
+
+            if (choice.find("joke") != string::npos) {
+                jokeBot.tellJoke();
+            } else if (choice.find("riddle") != string::npos) {
+                riddleBot.giveRiddle();
+            } else if (choice.find("games") != string::npos) {
+                cout << "Let's play tic-tac-toe!" << endl;
+                system(".\\tictactoe");
+            } else if (choice.find("songs") != string::npos) {
+                system("start https://open.spotify.com"); 
+            } else if (choice.find("videos") != string::npos) {
+                system("start https://www.youtube.com"); 
+            } else {
+                cout << "Alright, if you need anything else, just let me know!" << endl;
+            }
+            } 
+            else if (response.find("hate") != string::npos || 
+                 response.find("angry") != string::npos) {
+                 cout << "I'm really sorry if I upset you. Please let me help you in a different way." << endl;
+            } 
+            else if (response.find("thank") != string::npos || 
+                 response.find("grateful") != string::npos) {
+            cout << "Thank you! I'm glad to be of help. Do you have any work for me?" << endl;
+            } 
+            else {
+            cout << "I hope everything is okay. If you need anything, just let me know!" << endl;
+            }
+            }
+            else if (greet.find("Bye") != string::npos || 
+            greet.find("goodbye") != string::npos){
+            cout << "Goodbye! Have a great day!" << endl;
+            }
     }
 
     void processInput(const string& input) {
@@ -237,7 +306,6 @@ private:
             getline(cin, location);
             mapBot.openMaps(location);
             saveChat("Maps", location);
-            cout<< "Opened" << location << 
         } else if (input.find("wikipedia") != string::npos) {
             string query = input.substr(input.find("wikipedia") + 10); 
             searchWikipedia(trim(query));
@@ -286,8 +354,10 @@ private:
         string command;
         if (type == "simple") {
             command = "start simpleCalculator.exe";
+            cout<< "Opened Simple Calculator " << endl;
         } else if (type == "advanced") {
             command = "start advancedCalculator.exe";
+            cout << "Opened Advanced Calculator" << endl;
         } else {
             cout << "Calculator type not recognized." << endl;
             return;
@@ -301,6 +371,9 @@ private:
         try {
             if (system("start tictactoe.exe") != 0) {
                 throw runtime_error("Failed to open Tic-Tac-Toe game.");
+            }
+            else{
+                cout << "Tic-Tac-Toe game opened successfully." << endl;
             }
         } catch (const exception& e) {
             cout << "Error: " << e.what() << endl;
@@ -326,6 +399,9 @@ private:
         try {
             string command = "start https://en.wikipedia.org/wiki/Special:Search?search=" + query;
             if (system(command.c_str()) != 0) throw runtime_error("Failed to open Wikipedia search.");
+            else{
+                cout<<"Seached"<< query<< "on Wikipedia"<< endl;
+            }
         } catch (const runtime_error& e) {
             cout << "Error: " << e.what() << endl;
         }
@@ -350,7 +426,11 @@ private:
 };
 
 int main() {
-    ChatBot chatBot;
-    chatBot.startChat();
+    ChatBot kda;
+    string loggedInUser;
+    system ("cls");
+    cout<<"\t\t\t\t\t\t What do I call you? "<<endl;
+    getline(cin,loggedInUser);
+    kda.startChat(loggedInUser);
     return 0;
 }
