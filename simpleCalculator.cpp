@@ -1,55 +1,80 @@
+
 #include <iostream>
 #include <cmath>
 #include <windows.h>
+#include <string>
+#include <cstdlib>
+using namespace std;
+const string RESET = "\033[0m";
+const string RED = "\033[31m";
+const string GREEN = "\033[32m";
+const string YELLOW = "\033[33m";
+const string BLUE = "\033[34m";
+const string MAGENTA = "\033[35m";
+const string CYAN = "\033[36m";
+const string WHITE = "\033[37m";
+const string BOLD = "\033[1m";
+const string UNDERLINE = "\033[4m";
+
 using namespace std;
 class Calculator {
 public:
     void kdaCalculator() {
-        cout << "-----------------------------------------" << endl;
-        cout << "----                                  ---" << endl;
-        cout << "-                  KDA                  -" << endl;
-        cout << "-              CALCULATOR               -" << endl;
-        cout << "---                                   ---" << endl;
-        cout << "-----------------------------------------" << endl;
-        cout << "-      +     |      -      |      *     -" << endl;
-        cout << "-     Add    |   Subtract  |  Multiply  -" << endl;
-        cout << "-----------------------------------------" << endl;
-        cout << "-      /     |      m      |      L     -" << endl;
-        cout << "-   Divide   |     Mod     |     Log    -" << endl;
-        cout << "-----------------------------------------" << endl;
-        cout << "-      S     |      C      |      p     -" << endl;
-        cout << "-    Square  |    Cube     |    Power   -" << endl;
-        cout << "-----------------------------------------" << endl;
-        cout << "-      s     |      c      |      t     -" << endl;
-        cout << "-     sin    |     cos     |     tan    -" << endl;
-        cout << "-----------------------------------------" << endl;
-        cout << "-      r     |      k      |      .     -" << endl;
-        cout << "-  sq root   |    clear    |    close   -" << endl;
-        cout << "-----------------------------------------" << endl;
+    cout << RED << BOLD << "-----------------------------------------" << RESET << endl;
+    cout << RED << BOLD << "----                                  ---" << RESET << endl;
+    cout << RED << BOLD << "-                  KDA                  -" << RESET << endl;
+    cout << RED << BOLD << "-              CALCULATOR               -" << RESET << endl;
+    cout << RED << BOLD << "---                                   ---" << RESET << endl;
+    cout << RED << BOLD << "-----------------------------------------" << RESET << endl;
+    cout << GREEN << "-      " << "+     |      " << "-      |      " << "*     -" << RESET << endl;
+    cout << GREEN << "-     " << "Add    |   " << "Subtract  |  " << "Multiply  -" << RESET << endl;
+    cout << GREEN << "-----------------------------------------" << RESET << endl;
+
+    cout << GREEN << "-      " << "/     |      " << "m      |      " << "L     -" << RESET << endl;
+    cout << GREEN << "-   " << "Divide   |     " << "Mod     |     " << "Log    -" << RESET << endl;
+    cout << GREEN << "-----------------------------------------" << RESET << endl;
+
+    cout << GREEN << "-      " << "S     |      " << "C      |      " << "p     -" << RESET << endl;
+    cout << GREEN << "-    " << "Square  |    " << "Cube     |    " << "Power   -" << RESET << endl;
+    cout << GREEN << "-----------------------------------------" << RESET << endl;
+
+    cout << GREEN << "-      " << "s     |      " << "c      |      " << "t     -" << RESET << endl;
+    cout << GREEN << "-     " << "sin    |     " << "cos     |     " << "tan    -" << RESET << endl;
+    cout << GREEN << "-----------------------------------------" << RESET << endl;
+
+    cout << GREEN << "-      " << "r     |      " << "k      |      " << ".     -" << RESET << endl;
+    cout << GREEN << "-  " << "sq root   |    " << "clear    |    " << "close   -" << RESET << endl;
+    cout << GREEN << "-----------------------------------------" << RESET << endl;
     }
 
     void displayOutput(double answer) {
-        cout << "-----------------------------------------" << endl;
-        cout << "----                     ----------------" << endl;
-        cout << "-       Your             |     " << endl;
-        cout << "-       answer is:       |  " << answer << endl;
-        cout << "---                      ----------------" << endl;
-        cout << "-----------------------------------------" << endl;
-        cout << "-      +     |      -      |      *     -" << endl;
-        cout << "-     Add    |    Minus    |  Multiply  -" << endl;
-        cout << "-----------------------------------------" << endl;
-        cout << "-      /     |      m      |      L     -" << endl;
-        cout << "-   Divide   |     Mod     |     Log    -" << endl;
-        cout << "-----------------------------------------" << endl;
-        cout << "-      S     |      C      |      p     -" << endl;
-        cout << "-    Square  |    Cube     |    Power   -" << endl;
-        cout << "-----------------------------------------" << endl;
-        cout << "-      s     |      c      |      t     -" << endl;
-        cout << "-     sin    |     cos     |     tan    -" << endl;
-        cout << "-----------------------------------------" << endl;
-        cout << "-      r     |      k      |      .     -" << endl;
-        cout << "-  sq root   |    clear    |    close   -" << endl;
-        cout << "-----------------------------------------" << endl;
+    cout << RED << BOLD << "-----------------------------------------" << RESET << endl;
+    cout << RED << BOLD << "----                     ----------------" << RESET << endl;
+    cout << RED << BOLD << "-       Your             |     " << RESET << endl;
+    cout << RED << BOLD << "-       answer is:       |  " << GREEN << answer << RESET << endl;
+    cout << RED << BOLD << "---                      ----------------" << RESET << endl;
+    cout << RED << BOLD << "-----------------------------------------" << RESET << endl;
+
+    cout << GREEN << "-      " << "+     |      " << "-" << "      |      " << "*" << "     -" << RESET << endl;
+    cout << GREEN << "-     " << "Add    |    " << "Minus    |  " << "Multiply  -" << RESET << endl;
+    cout << GREEN << "-----------------------------------------" << RESET << endl;
+
+    cout << GREEN << "-      " << "/     |      " << "m" << "      |      " << "L" << "     -" << RESET << endl;
+    cout << GREEN << "-   " << "Divide   |     " << "Mod     |     " << "Log    -" << RESET << endl;
+    cout << GREEN << "-----------------------------------------" << RESET << endl;
+
+    cout << GREEN << "-      " << "S     |      " << "C" << "      |      " << "p" << "     -" << RESET << endl;
+    cout << GREEN << "-    " << "Square  |    " << "Cube     |    " << "Power   -" << RESET << endl;
+    cout << GREEN << "-----------------------------------------" << RESET << endl;
+
+    cout << GREEN << "-      " << "s     |      " << "c" << "      |      " << "t" << "     -" << RESET << endl;
+    cout << GREEN << "-     " << "sin    |     " << "cos     |     " << "tan    -" << RESET << endl;
+    cout << GREEN << "-----------------------------------------" << RESET << endl;
+
+    cout << GREEN << "-      " << "r     |      " << "k" << "      |      " << "." << "     -" << RESET << endl;
+    cout << GREEN << "-  " << "sq root   |    " << "clear    |    " << "close   -" << RESET << endl;
+    cout << GREEN << "-----------------------------------------" << RESET << endl;
+
     }
 
     void run() {
@@ -140,9 +165,7 @@ public:
                 cout<<"Press any key to EXIT "<<endl;
                 cin.ignore();
                 cin.get();
-                system("cls");
-                system(".\\KDABot");
-                   
+                break;             
             default:
                 cout << "*****Please enter a valid number!***** " << endl;
             }

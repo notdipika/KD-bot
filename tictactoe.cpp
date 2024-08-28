@@ -42,19 +42,18 @@ void undoMove(int slot) {
 }
 
 int winner() {
-    // Check rows
     for (int i = 0; i < 3; i++) {
         if (board[i][0] == board[i][1] && board[i][1] == board[i][2]) {
             return (board[i][0] == 'X') ? 1 : 2;
         }
     }
-    // Check columns
+
     for (int i = 0; i < 3; i++) {
         if (board[0][i] == board[1][i] && board[1][i] == board[2][i]) {
             return (board[0][i] == 'X') ? 1 : 2;
         }
     }
-    // Check diagonals
+
     if (board[0][0] == board[1][1] && board[1][1] == board[2][2]) {
         return (board[0][0] == 'X') ? 1 : 2;
     }
@@ -155,7 +154,7 @@ void playGame() {
     while (true) {
         int slot;
         if (currentPlayer == 1) {
-            cout << "It's Player 1's turn. Enter your slot: ";
+            cout << "It's your turn; ";
             cin >> slot;
 
             if (!placeMarker(slot, 'X')) {
@@ -163,12 +162,12 @@ void playGame() {
                 continue;
             }
 
-            system("cls"); // Clear the screen
+            system("cls"); 
             drawBoard();
 
             int win = winner();
             if (win == 1) {
-                cout << "Player 1 wins!\n";
+                cout << "You win!\n";
                 break;
             } else if (boardIsFull()) {
                 cout << "It's a tie!\n";
@@ -180,7 +179,7 @@ void playGame() {
 
         if (currentPlayer == 2) {
             computerMove();
-            system("cls"); // Clear the screen
+            system("cls"); 
             drawBoard();
 
             int win = winner();
@@ -202,7 +201,7 @@ int main() {
     char playAgain;
     do {
         cout << "Welcome to Tic-Tac-Toe!\n";
-        cout << "Player 1, choose your marker: ";
+        cout << "Choose your marker: ";
         char markerP1;
         cin >> markerP1;
 

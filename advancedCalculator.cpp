@@ -331,7 +331,6 @@ public:
     }
 };
 
-// Class for Base Conversion Operations
 class BaseConversion {
 public:
     static void decimalToBinary(int number) {
@@ -641,8 +640,6 @@ public:
         cout<<"press any key to EXIT"<<endl;
         cin.ignore();
         cin.get();
-        system("cls");
-        system(".\\KDABot");
         break;
 
          
@@ -672,3 +669,4 @@ int main() {
     }
 
  
+

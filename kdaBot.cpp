@@ -84,11 +84,11 @@ public:
 class JokeBot {
 private:
     vector<string> jokes = {
-        "Why don't scientists trust atoms? Because they make up everything!",
-        "What do you call fake spaghetti? An impasta!",
-        "Why did the scarecrow win an award? Because he was outstanding in his field!",
-        "How does a penguin build its house? Igloos it together!",
-        "Why did the bicycle fall over? Because it was two-tired!"
+        "Why don't scientists trust atoms?",
+        "What do you call fake spaghetti?",
+        "Why did the scarecrow win an award? ",
+        "How does a penguin build its house? ",
+        "Why did the bicycle fall over? "
     };
 public:
     void tellJoke() {
@@ -197,7 +197,9 @@ public:
                 cout << "Enter your message (type 'exit' to end): ";
                 getline(cin, conversation);
                 if (conversation == "exit") {
-                    system("start UserManager.exe");
+                cout << "Goodbye! Have a great day!" << endl;
+                system("cls");
+                exit(0);
                 } 
                 processInput(toLowerCase(trim(conversation)));
             }
@@ -235,6 +237,7 @@ private:
             getline(cin, location);
             mapBot.openMaps(location);
             saveChat("Maps", location);
+            cout<< "Opened" << location << 
         } else if (input.find("wikipedia") != string::npos) {
             string query = input.substr(input.find("wikipedia") + 10); 
             searchWikipedia(trim(query));
@@ -310,7 +313,6 @@ private:
             try {
                 string command = "start " + it->second;
                 if (system(command.c_str()) != 0) throw runtime_error("Failed to open URL.");
-                // Save the URL in the chat history
                 chatHistory.push_back(it->second);
             } catch (const exception& e) {
                 cout << "Error: " << e.what() << endl;
