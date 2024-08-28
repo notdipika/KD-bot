@@ -8,11 +8,14 @@ int currentPlayer;
 
 void drawBoard() {
     system("cls");
-    cout << " " << board[0][0] << " | " << board[0][1] << " | " << board[0][2] << endl;
-    cout << "---|---|---" << endl;
-    cout << " " << board[1][0] << " | " << board[1][1] << " | " << board[1][2] << endl;
-    cout << "---|---|---" << endl;
-    cout << " " << board[2][0] << " | " << board[2][1] << " | " << board[2][2] << endl;
+    cout << endl << endl ;
+    cout << "\t\t\t\t     KDA-TIC-TAC-TOE"<< endl;
+    cout << endl;
+    cout << "\t\t\t\t\t" << " " << board[0][0] << " | " << board[0][1] << " | " << board[0][2] << endl;
+    cout << "\t\t\t\t\t" << "---|---|---" << endl;
+    cout << "\t\t\t\t\t"<< " " << board[1][0] << " | " << board[1][1] << " | " << board[1][2] << endl;
+    cout << "\t\t\t\t\t" << "---|---|---" << endl;
+    cout << "\t\t\t\t\t" << " " << board[2][0] << " | " << board[2][1] << " | " << board[2][2] << endl;
 }
 
 void initializeBoard() {
@@ -154,7 +157,8 @@ void playGame() {
     while (true) {
         int slot;
         if (currentPlayer == 1) {
-            cout << "It's your turn; ";
+            cout << endl;
+            cout << "It's your turn: ";
             cin >> slot;
 
             if (!placeMarker(slot, 'X')) {
@@ -200,8 +204,8 @@ int main() {
     system ("cls");
     char playAgain;
     do {
-        cout << "Welcome to Tic-Tac-Toe!\n";
-        cout << "Choose your marker: ";
+        cout << "\t\t\t\t\tWelcome to Tic-Tac-Toe!\n";
+        cout << "\t\t\t\t\tChoose your marker: ";
         char markerP1;
         cin >> markerP1;
 
