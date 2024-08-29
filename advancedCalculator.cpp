@@ -667,6 +667,3 @@ int main() {
     calc.performOperation();
     return 0;
     }
-
- 
-

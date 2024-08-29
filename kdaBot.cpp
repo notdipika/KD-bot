@@ -8,7 +8,6 @@
 #include <stdexcept>
 #include <algorithm>
 #include <windows.h>
-
 using namespace std;
 
     const string RESET = "\033[0m";
@@ -180,6 +179,7 @@ class ChatBot {
 
     unordered_map<string, string> urlMapping = {
         {"oops notes", "https://github.com/notdipika/cpp-lab"},
+        {"oops assignment", "https://github.com/karkikaruna/cpp-Assignment"},
         {"edc manual", "https://drive.google.com/drive/folders/1jNfgqS1i-_BngSqL2S8XKWSoctjmF4Ad"},
         {"edc notes", "https://drive.google.com/drive/folders/1jNfgqS1i-_BngSqL2S8XKWSoctjmF4Ad"},
         {"ecm notes", "https://drive.google.com/drive/folders/1_plPwJp0k5AdHEtlizsv8ODRZuBJnkvc"},
@@ -266,7 +266,7 @@ private:
                 riddleBot.giveRiddle();
             } else if (choice.find("games") != string::npos) {
                 cout << "Let's play tic-tac-toe!" << endl;
-                system(".\\tictactoe");
+                system("start tictactoe.exe");
             } else if (choice.find("songs") != string::npos) {
                 system("start https://open.spotify.com"); 
             } else if (choice.find("videos") != string::npos) {
@@ -296,7 +296,18 @@ private:
     void processInput(const string& input) {
         if (input == "yes") {
             cout << "What would you like me to do?" << endl;
-        } else if (input == "no") {
+        } 
+        else if (input.find("hi") != string::npos || 
+                     input.find("Hi") != string::npos || 
+                     input.find("hiii") != string::npos || 
+                     input.find("hello") != string::npos ||
+                     input.find("hlo") != string::npos||
+                     input.find("namaste")!=string::npos||
+                     input.find("Hello")!=string::npos
+                     ) {
+                cout << "How can I help you? " << endl;
+
+        }else if (input == "no") {
             cout << "Okay, let me know if you need anything." << endl;
         } else if (input.find("time") != string::npos) {
             timeBot.tellTime();
@@ -321,12 +332,33 @@ private:
             jokeBot.tellJoke();
         } else if (input.find("riddle") != string::npos) {
             riddleBot.giveRiddle();
-        } else if (input.find("calculator") != string::npos) {
-            cout << "Would you like to use a simple or advanced calculator? (simple/advanced): ";
-            string choice;
-            getline(cin, choice);
-            openCalculator(toLowerCase(trim(choice)));
-        } else if (input.find("tictactoe") != string::npos) {
+        } else if (input.find("add") != string::npos || 
+                     input.find("subtract") != string::npos || 
+                     input.find("sum") != string::npos || 
+                     input.find("product") != string::npos ||
+                     input.find("math") != string::npos||
+                     input.find("log")!=string::npos||
+                     input.find("value")!=string::npos||
+                     input.find("calculator")!=string::npos||
+                     input.find("solve")!=string::npos
+                     ) {
+                cout << "Would you like to open a calculator? (yes/no): ";
+                string answer;
+                getline(cin, answer);
+                transform(answer.begin(), answer.end(), answer.begin(), ::tolower);
+
+                if (answer.find("yes") != string::npos) {
+                    cout << "Do you want to use a simple calculator or an advanced calculator? (simple/advanced): ";
+                    string choice;
+                    getline(cin, choice);
+                    openCalculator(toLowerCase(trim(choice)));
+
+                } else if (answer.find("no") != string::npos) {
+                    cout << "Alright, if you need anything else, just let me know!" << endl;
+                } else {
+                    cout << "I didn't quite get that. Please respond with 'yes' or 'no'." << endl;
+                }
+        } else if (input.find("tictactoe") != string::npos || input.find("tic tac toe") != string::npos || input.find("TICTACTOE") != string::npos  || input.find("games") != string::npos || input.find("Game") != string::npos || input.find("game") != string::npos) {
             cout << "Would you like to play Tic-Tac-Toe? (yes/no): ";
             string response;
             getline(cin, response);
@@ -391,7 +423,7 @@ private:
                 cout << "Error: " << e.what() << endl;
             }
         } else {
-            cout << "Sorry, I don't have a link for that." << endl;
+            cout << "I didnt get that." << endl;
         }
     }
 
