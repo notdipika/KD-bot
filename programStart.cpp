@@ -25,9 +25,12 @@ private:
 
 public:
     void registerUser() {
+        system("cls");
+        cout << BLUE << BOLD << "\t\t\t\t\t\t\t   KDA-BOT\n" << endl;
+        cout << CYAN <<"\t\t\t\t\t\t\tREGISTRATION"<< RESET <<endl;
         try {
             while (true) {
-                cout << "Enter a username to register: ";
+                cout << YELLOW << "\nEnter a username: "<<RESET;
                 getline(cin, loggedInUser);
 
                 if (isUsernameTaken(loggedInUser)) {
@@ -37,7 +40,7 @@ public:
                 }
             }
             
-            cout << "Enter a password: ";
+            cout << YELLOW << "Enter a password: "<<RESET;
             getline(cin, loggedInPassword);
             saveCredentials();
             cout << "Registration successful! Please log in." << endl;
@@ -47,15 +50,30 @@ public:
     }
 
     void login() {
+        system("cls");
+        cout << BLUE << BOLD << "\t\t\t\t\t\t\tKDA-BOT\n" << endl;
+        cout << CYAN <<"\t\t\t\t\t\t\t LOGIN"<< RESET <<endl;
         try {
-            system("Cls");
             string username, password;
-            cout << "Enter your username: ";
+            cout << YELLOW << "Username: "<<RESET;
             getline(cin, username);
+
+            if (!isUsernameTaken(username)) {
+            cout << "Username doesn't exist." << endl<< endl;
+            cout<< CYAN<<"\t\t\t\t\t\t  1. TRY AGAIN" << RESET << endl;
+            cout<< CYAN<<"\t\t\t\t\t\t  2. RETURN TO HOME" << RESET << endl;
+            int choice;
+            cin >> choice;
+            cin.ignore();
+            if (choice == 1) {
+                login();  
+            } 
+            return; 
+        }
 
             int attempts = 3;
             while (attempts > 0) {
-                cout << "Enter your password (Attempts left: " << attempts << "): ";
+                cout << YELLOW << "Password: "<<RESET;
                 getline(cin, password);
 
                 if (checkCredentials(username, password)) {
@@ -63,16 +81,16 @@ public:
                     isLoggedIn = true;
                     loggedInUser = username;
                     loggedInPassword = password;
-                    cout << "Login successful!" << endl;
-                    loadConversationHistory();  
+                    cout << CYAN << BOLD << "\n\n\n\t\t\t\t\t\tLogin successful."<< RESET << endl << endl;
                     return;  
                 } else {
                     attempts--;
                     if (attempts > 0) {
                         cout << "Incorrect password. Please try again." << endl;
                     } else {
-                        cout << "Wrong password. You can reset your password if you wish." << endl;
-                        cout << "Press 1 to reset your password or 2 to return to the main menu: ";
+                        cout << "Incorrect password." << endl << endl;
+                        cout<< CYAN<<"\t\t\t\t\t\t1. RESET YOUR PASSWORD"<< RESET <<endl;
+                        cout<< CYAN<<"\t\t\t\t\t\t2. RETURN TO HOME"<< RESET << endl;
                         int choice;
                         cin >> choice;
                         cin.ignore(); 
@@ -108,36 +126,11 @@ public:
         return isLoggedIn;
     }
 
-    void saveConversationHistory(const string& conversation) {
-        if (!isLoggedIn) return;  
-        string filename = loggedInUser + "_conversation.txt";
-        ofstream file(filename, ios::app);
-        if (!file) throw runtime_error("Failed to open file for saving conversation history.");
-        file << conversation << endl;
-        file.close();
-    }
-
-    void loadConversationHistory() {
-        if (!isLoggedIn) return; 
-        string filename = loggedInUser + "_conversation.txt";
-        if (fileExists(filename)) {
-            ifstream file(filename);
-            if (!file) throw runtime_error("Failed to open file for loading conversation history.");
-            string line;
-            while (getline(file, line)) {
-                cout << line << endl;
-            }
-            file.close();
-        } else {
-            cout << "No previous conversation found." << endl;
-        }
-    }
-
     void forgotPassword(const string& username) {
         try {
             string newPassword;
             cout << "Enter your new password: ";
-            cin >> newPassword;
+            getline(cin, newPassword);
 
             if (resetPassword(username, newPassword)) {
                 cout << "Password reset successfully!" << endl;
@@ -196,10 +189,14 @@ private:
     bool resetPassword(const string& username, const string& newPassword) {
         ifstream inFile("users.txt");
         ofstream tempFile("temp.txt");
-        string id, pass;
+        string line;
         bool userFound = false;
 
-        while (inFile >> id >> pass) {
+        while (getline(inFile, line)) {
+            size_t delimiterPos = line.find(':');
+            string id = line.substr(0, delimiterPos);
+            string pass = line.substr(delimiterPos + 1);
+
             if (id == username) {
                 tempFile << id << ":" << newPassword << endl;
                 userFound = true;
@@ -227,7 +224,7 @@ public:
         do {
             system("cls");
             cout << endl << endl;
-            cout << BLUE << BOLD << "\t\t\t\t\t\t\t\tHi, I am KDA bot" << endl;
+            cout << BLUE << BOLD << "\t\t\t\t\t\t\t\tHi, I am KDA-BOT" << endl;
             cout << BLUE << BOLD << "\t\t\t\t\t\t\tI am your personal Assistant!" << endl;
             cout << endl << endl ;
             
@@ -235,8 +232,8 @@ public:
                 cout << CYAN << BOLD << "\t\t\t\t---------------------------------------------------------------------------------" << endl;
                 cout << CYAN << BOLD << "\t\t\t\t|                    Do you want to logout or continue?                         |" << endl;
                 cout << CYAN << BOLD << "\t\t\t\t---------------------------------------------------------------------------------" << endl;
-                cout << YELLOW << "\t\tPress 1 to LOGOUT" << endl;
-                cout << YELLOW << "\t\tPress 2 to CONTINUE" << endl;
+                cout << YELLOW << "\t\t\t\t\t\t\t1. LOGOUT" << endl;
+                cout << YELLOW << "\t\t\t\t\t\t\t2. START A NEW CHAT" << endl;
                 cin >> choice;
                 cin.ignore(); 
 
@@ -249,9 +246,9 @@ public:
                 cout << CYAN << BOLD << "\t\t\t\t---------------------------------------------------------------------------------" << endl;
                 cout << CYAN << BOLD << "\t\t\t\t|                     Please LOGIN OR REGISTER to continue.........             |" << endl;
                 cout << CYAN << BOLD << "\t\t\t\t---------------------------------------------------------------------------------" << endl;
-                cout << YELLOW << "\t\tPress 1 to LOGIN " << endl;
-                cout << YELLOW << "\t\tPress 2 to REGISTER" << endl;
-                cout << YELLOW << "\t\tPress 3 to EXIT" << endl;
+                cout << YELLOW << "\t\t\t\t\t\t\t1. LOGIN " << endl;
+                cout << YELLOW << "\t\t\t\t\t\t\t2. REGISTER" << endl;
+                cout << YELLOW << "\t\t\t\t\t\t\t3. EXIT" << RESET << endl;
                 cin >> choice;
                 cin.ignore(); 
 
@@ -264,8 +261,10 @@ public:
                         break;
                     case 3:
                         system("cls");
-                        cout << "/t/t/t Thank you!" << endl;
-                        system("cls");
+                        cout << BLUE << BOLD << "\t\t\t\t\t\t\t  KDA-BOT\n" << endl;
+                        cout << CYAN << "\t\t\t\t\t\tTHANK YOU, PLEASE VISIT AGAIN!" << RESET <<endl;
+                        cin.ignore();
+                        system("Cls");
                         break;
                     default:
                         cout << "Please choose a valid number \n" << endl;
@@ -283,7 +282,7 @@ public:
     }
 
     void heroAfterLogin() {
-        cout << "Press any key to continue " << endl;
+        cout << "\t\t\t\t\t   Press any key to continue " << endl;
         cin.ignore();
         cin.get();
         system("cls");
@@ -298,5 +297,3 @@ int main() {
     lg.heroBeforeLogin();
     return 0;
 }
-
-
