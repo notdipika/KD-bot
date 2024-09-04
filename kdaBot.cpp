@@ -235,13 +235,14 @@ public:
 private:
     void handleUserMood() {
     string greet;
+    transform(greet.begin(), greet.end(), greet.begin(), ::tolower);
     getline(cin, greet);
-    if (greet.find("Hi") != string::npos || 
-        greet.find("Hello") != string::npos || 
+    if (greet.find("hi") != string::npos || 
+        greet.find("hello") != string::npos || 
         greet.find("hii") != string::npos || 
-        greet.find("Hlo") != string::npos  || 
-        greet.find("Hello") != string::npos || 
-        greet.find("hii") != string::npos ){
+        greet.find("hlo") != string::npos  || 
+        greet.find("namaste") != string::npos || 
+        greet.find("hiii") != string::npos ){
             cout << "How are you feeling today? " << endl;
             string response;
             transform(response.begin(), response.end(), response.begin(), ::tolower);
@@ -298,15 +299,13 @@ private:
             cout << "What would you like me to do?" << endl;
         } 
         else if (input.find("hi") != string::npos || 
-                     input.find("Hi") != string::npos || 
+                     input.find("hii") != string::npos || 
                      input.find("hiii") != string::npos || 
                      input.find("hello") != string::npos ||
                      input.find("hlo") != string::npos||
-                     input.find("namaste")!=string::npos||
-                     input.find("Hello")!=string::npos
+                     input.find("namaste")!=string::npos
                      ) {
                 cout << "How can I help you? " << endl;
-
         }else if (input == "no") {
             cout << "Okay, let me know if you need anything." << endl;
         } else if (input.find("time") != string::npos) {

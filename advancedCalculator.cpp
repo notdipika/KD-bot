@@ -4,27 +4,38 @@
 #include <bitset>
 #include <iomanip>
 using namespace std;
+const string RESET = "\033[0m";
+const string RED = "\033[31m";
+const string GREEN = "\033[32m";
+const string YELLOW = "\033[33m";
+const string BLUE = "\033[34m";
+const string MAGENTA = "\033[35m";
+const string CYAN = "\033[36m";
+const string WHITE = "\033[37m";
+const string BOLD = "\033[1m";
+const string UNDERLINE = "\033[4m";
+
 class heroSection{
     public:
 
     void introCalculator() {
-     cout << "\t\t---------------------------------------------------------------------------------------------------------------------" << endl;
-     cout << "\t\t-                                                                                                                  --"<< endl;
-     cout << "\t\t---                                             KDA Calculator                                                    ----"<< endl;                     
-     cout << "\t\t-                                      solve your math problem here...                                             --"<< endl;
-     cout << "\t\t---------------------------------------------------------------------------------------------------------------------" << endl;
-     cout << "\t\t-     +       |      -       |          *       |       /      |      %      |       p        |         !           |" << endl;
-     cout << "\t\t-    Add      |   Subtract   |       multiply   |     Divide   |     mod     |     power      |      factorial      |" << endl;
-     cout << "\t\t---------------------------------------------------------------------------------------------------------------------" << endl;
-     cout << "\t\t-     s       |      c       |          t       |        P     |      C      |        x       |         y           |" << endl;
-     cout << "\t\t-    sin      |     cos      |         tan      |       npr    |     ncr     |      c to p    |       p yo c        |" << endl;
-     cout << "\t\t---------------------------------------------------------------------------------------------------------------------" << endl;
-     cout << "\t\t-     z       |      M       |          1        |       q     |      2      |        3       |         B            |  " << endl;
-     cout << "\t\t-  complex    |   matrix     |       ax+b=0      | ax^2+bx+c=0 |  anx+bny=cn | anx+bny+cnz=dn |        Base          |" << endl;
-     cout << "\t\t---------------------------------------------------------------------------------------------------------------------" << endl;
-     cout << "\t\t-     4       |      5       |          6        |       L     |      l      |        k       |         .            | "<<endl;
-     cout << "\t\t-    sin'1    |    cos'1     |        tan'1      |      log    |     ln      |      clear     |        close         | "<<endl; 
-     cout << "\t\t-----------------------------------------------------------------------------------------------------------------------"<<endl;          
+     cout << RED << BOLD << "\t\t---------------------------------------------------------------------------------------------------------------------"<< RESET  << endl;
+     cout << RED << BOLD<< "\t\t-                                                                                                                  --"<< RESET << endl;
+     cout << RED << BOLD<< "\t\t---                                             KDA Calculator                                                    ----"<< RESET << endl;                     
+     cout << RED << BOLD<< "\t\t-                                      solve your math problem here...                                             --"<< RESET << endl;
+     cout << RED << BOLD<< "\t\t---------------------------------------------------------------------------------------------------------------------"<< RESET  << endl;
+     cout << GREEN << "\t\t-     +       |      -       |          *       |       /      |      %      |       p        |         !           |" << RESET << endl;
+     cout << GREEN << "\t\t-    Add      |   Subtract   |       multiply   |     Divide   |     mod     |     power      |      factorial      |"<< RESET  << endl;
+     cout << GREEN << "\t\t---------------------------------------------------------------------------------------------------------------------"<< RESET  << endl;
+     cout << GREEN << "\t\t-     s       |      c       |          t       |        P     |      C      |        x       |         y           |"<< RESET  << endl;
+     cout << GREEN << "\t\t-    sin      |     cos      |         tan      |       npr    |     ncr     |      c to p    |       p yo c        |"<< RESET  << endl;
+     cout << GREEN << "\t\t---------------------------------------------------------------------------------------------------------------------" << RESET << endl;
+     cout << GREEN << "\t\t-     z       |      M       |          1        |       q     |      2      |        3       |         B            |  " << RESET << endl;
+     cout << GREEN << "\t\t-  complex    |   matrix     |       ax+b=0      | ax^2+bx+c=0 |  anx+bny=cn | anx+bny+cnz=dn |        Base          |" << RESET << endl;
+     cout << GREEN << "\t\t---------------------------------------------------------------------------------------------------------------------" << RESET << endl;
+     cout << GREEN << "\t\t-     4       |      5       |          6        |       L     |      l      |        k       |         .            | "<< RESET <<endl;
+     cout << GREEN << "\t\t-    sin'1    |    cos'1     |        tan'1      |      log    |     ln      |      clear     |        close         | "<< RESET <<endl; 
+     cout << GREEN << "\t\t-----------------------------------------------------------------------------------------------------------------------"<< RESET <<endl;          
         
     }
 };
@@ -225,12 +236,16 @@ public:
 
 class MatrixOperations {
 private:
-    int matrix1[2][2];
-    int matrix2[2][2];
-    int result[2][2];
+    int matrix1_2x2[2][2];
+    int matrix2_2x2[2][2];
+    int result_2x2[2][2];
+
+    int matrix1_3x3[3][3];
+    int matrix2_3x3[3][3];
+    int result_3x3[3][3];
 
 public:
-    void inputMatrix(int matrix[2][2], const string& name) {
+    void inputMatrix2x2(int matrix[2][2], const string& name) {
         cout << "Enter the elements of " << name << " (2x2):" << endl;
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 2; j++) {
@@ -240,7 +255,17 @@ public:
         }
     }
 
-    void displayMatrix(int matrix[2][2]) {
+    void inputMatrix3x3(int matrix[3][3], const string& name) {
+        cout << "Enter the elements of " << name << " (3x3):" << endl;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                cout << "Element [" << i + 1 << "][" << j + 1 << "]: ";
+                cin >> matrix[i][j];
+            }
+        }
+    }
+
+    void displayMatrix2x2(int matrix[2][2]) {
         cout << "Matrix:" << endl;
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 2; j++) {
@@ -250,50 +275,97 @@ public:
         }
     }
 
-    void addMatrices() {
-        for (int i = 0; i < 2; i++) {
-            for (int j = 0; j < 2; j++) {
-                result[i][j] = matrix1[i][j] + matrix2[i][j];
+    void displayMatrix3x3(int matrix[3][3]) {
+        cout << "Matrix:" << endl;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                cout << matrix[i][j] << " ";
             }
+            cout << endl;
         }
-        cout << "Sum of matrices:" << endl;
-        displayMatrix(result);
     }
 
-    void subtractMatrices() {
+    void addMatrices2x2() {
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 2; j++) {
-                result[i][j] = matrix1[i][j] - matrix2[i][j];
+                result_2x2[i][j] = matrix1_2x2[i][j] + matrix2_2x2[i][j];
             }
         }
-        cout << "Difference of matrices:" << endl;
-        displayMatrix(result);
+        cout << "Sum of matrices (2x2):" << endl;
+        displayMatrix2x2(result_2x2);
     }
 
-    void multiplyMatrices() {
+    void subtractMatrices2x2() {
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 2; j++) {
-                result[i][j] = 0;
+                result_2x2[i][j] = matrix1_2x2[i][j] - matrix2_2x2[i][j];
+            }
+        }
+        cout << "Difference of matrices (2x2):" << endl;
+        displayMatrix2x2(result_2x2);
+    }
+
+    void multiplyMatrices2x2() {
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 2; j++) {
+                result_2x2[i][j] = 0;
                 for (int k = 0; k < 2; k++) {
-                    result[i][j] += matrix1[i][k] * matrix2[k][j];
+                    result_2x2[i][j] += matrix1_2x2[i][k] * matrix2_2x2[k][j];
                 }
             }
         }
-        cout << "Product of matrices:" << endl;
-        displayMatrix(result);
+        cout << "Product of matrices (2x2):" << endl;
+        displayMatrix2x2(result_2x2);
     }
 
-    void determinant() {
-        int det = matrix1[0][0] * matrix1[1][1] - matrix1[0][1] * matrix1[1][0];
-        cout << "Determinant of the matrix: " << det << endl;
+    void addMatrices3x3() {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                result_3x3[i][j] = matrix1_3x3[i][j] + matrix2_3x3[i][j];
+            }
+        }
+        cout << "Sum of matrices (3x3):" << endl;
+        displayMatrix3x3(result_3x3);
     }
 
-    void setMatrix1() {
-        inputMatrix(matrix1, "Matrix 1");
+    void subtractMatrices3x3() {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                result_3x3[i][j] = matrix1_3x3[i][j] - matrix2_3x3[i][j];
+            }
+        }
+        cout << "Difference of matrices (3x3):" << endl;
+        displayMatrix3x3(result_3x3);
     }
 
-    void setMatrix2() {
-        inputMatrix(matrix2, "Matrix 2");
+    void multiplyMatrices3x3() {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                result_3x3[i][j] = 0;
+                for (int k = 0; k < 3; k++) {
+                    result_3x3[i][j] += matrix1_3x3[i][k] * matrix2_3x3[k][j];
+                }
+            }
+        }
+        cout << "Product of matrices (3x3):" << endl;
+        displayMatrix3x3(result_3x3);
+    }
+
+    void determinant3x3() {
+        int det = matrix1_3x3[0][0] * (matrix1_3x3[1][1] * matrix1_3x3[2][2] - matrix1_3x3[1][2] * matrix1_3x3[2][1]) -
+                  matrix1_3x3[0][1] * (matrix1_3x3[1][0] * matrix1_3x3[2][2] - matrix1_3x3[1][2] * matrix1_3x3[2][0]) +
+                  matrix1_3x3[0][2] * (matrix1_3x3[1][0] * matrix1_3x3[2][1] - matrix1_3x3[1][1] * matrix1_3x3[2][0]);
+        cout << "Determinant of the matrix (3x3): " << det << endl;
+    }
+
+    void setMatrix2x2() {
+        inputMatrix2x2(matrix1_2x2, "Matrix 1");
+        inputMatrix2x2(matrix2_2x2, "Matrix 2");
+    }
+
+    void setMatrix3x3() {
+        inputMatrix3x3(matrix1_3x3, "Matrix 1");
+        inputMatrix3x3(matrix2_3x3, "Matrix 2");
     }
 };
 
@@ -497,32 +569,62 @@ public:
                 threeVarEq.solve();
                 break;
             case 'M':
-                matrixOps.setMatrix1();
-                matrixOps.setMatrix2();
-                {
-                    int matrixChoice;
-                    cout << "Choose matrix operation (1: Addition, 2: Subtraction, 3: Multiplication, 4: Determinant): ";
-                    cin >> matrixChoice;
-                    switch (matrixChoice) {
+                int size;
+                cout << "Choose matrix size (2: 2x2, 3: 3x3): ";
+                cin >> size;
+                if (size == 2) {
+                matrixOps.setMatrix2x2();
+                int matrixChoice;
+                cout << "Choose matrix operation (1: Addition, 2: Subtraction, 3: Multiplication): ";
+                cin >> matrixChoice;
+                switch (matrixChoice) {
+                    case 1:
+                    matrixOps.addMatrices2x2();
+                    break;
+
+                    case 2:
+                    matrixOps.subtractMatrices2x2();
+                    break;
+
+                    case 3:
+                    matrixOps.multiplyMatrices2x2();
+                    break;
+
+                    default:
+                    cout << "Invalid choice" << endl;
+                    break;
+                    } 
+                }else if (size == 3) {
+                        matrixOps.setMatrix3x3();
+                        int matrixChoice;
+                        cout << "Choose matrix operation (1: Addition, 2: Subtraction, 3: Multiplication, 4: Determinant): ";
+                        cin >> matrixChoice;
+                        switch (matrixChoice) {
                         case 1:
-                            matrixOps.addMatrices();
-                            break;
+                        matrixOps.addMatrices3x3();
+                        break;
+
                         case 2:
-                            matrixOps.subtractMatrices();
-                            break;
+                        matrixOps.subtractMatrices3x3();
+                        break;
+                        
                         case 3:
-                            matrixOps.multiplyMatrices();
-                            break;
+                        matrixOps.multiplyMatrices3x3();
+                        break;
+                        
                         case 4:
-                            matrixOps.determinant();
-                            break;
+                        matrixOps.determinant3x3();
+                        break;
+                        
                         default:
-                            cout << "Invalid choice" << endl;
-                            break;
+                        cout << "Invalid choice" << endl;
+                        break;
                     }
+                } else {
+                    cout << "Invalid matrix size" << endl;
                 }
                 break;
-
+            
             case 'z': {
             int op;
             double r1, i1, r2, i2;

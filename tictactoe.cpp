@@ -2,6 +2,19 @@
 #include <cstdlib>  
 using namespace std;
 
+
+const string RESET = "\033[0m";
+const string RED = "\033[31m";
+const string GREEN = "\033[32m";
+const string YELLOW = "\033[33m";
+const string BLUE = "\033[34m";
+const string MAGENTA = "\033[35m";
+const string CYAN = "\033[36m";
+const string WHITE = "\033[37m";
+const string BOLD = "\033[1m";
+const string UNDERLINE = "\033[4m";
+
+
 char board[3][3];
 char currentMarker;
 int currentPlayer;
@@ -9,13 +22,13 @@ int currentPlayer;
 void drawBoard() {
     system("cls");
     cout << endl << endl ;
-    cout << "\t\t\t\t     KDA-TIC-TAC-TOE"<< endl;
+    cout << BLUE << BOLD  << "\t\t\t\t      KDA-TIC-TAC-TOE"<< RESET <<endl;
     cout << endl;
-    cout << "\t\t\t\t\t" << " " << board[0][0] << " | " << board[0][1] << " | " << board[0][2] << endl;
-    cout << "\t\t\t\t\t" << "---|---|---" << endl;
-    cout << "\t\t\t\t\t"<< " " << board[1][0] << " | " << board[1][1] << " | " << board[1][2] << endl;
-    cout << "\t\t\t\t\t" << "---|---|---" << endl;
-    cout << "\t\t\t\t\t" << " " << board[2][0] << " | " << board[2][1] << " | " << board[2][2] << endl;
+    cout << CYAN<< "\t\t\t\t\t" << " " << RESET <<board[0][0]  << CYAN<< " | " <<RESET << board[0][1]  << CYAN<< " | " <<RESET << board[0][2] << endl;
+    cout << CYAN<< "\t\t\t\t\t" << "---|---|---" << endl;
+    cout << CYAN<< "\t\t\t\t\t"<< " " << RESET << board[1][0]  << CYAN<< " | "<< RESET << board[1][1]  << CYAN << " | "  << RESET<< board[1][2] << endl;
+    cout << CYAN<< "\t\t\t\t\t" << "---|---|---" << endl;
+    cout << CYAN<< "\t\t\t\t\t" << " " << RESET << board[2][0]  << CYAN<< " | " <<RESET << board[2][1]  << CYAN<< " | " <<RESET << board[2][2]<< endl;
 }
 
 void initializeBoard() {
@@ -158,7 +171,7 @@ void playGame() {
         int slot;
         if (currentPlayer == 1) {
             cout << endl;
-            cout << "It's your turn: ";
+            cout << "\nIt's your turn: ";
             cin >> slot;
 
             if (!placeMarker(slot, 'X')) {
@@ -171,10 +184,10 @@ void playGame() {
 
             int win = winner();
             if (win == 1) {
-                cout << "You win!\n";
+                cout << "\nYou win!\n";
                 break;
             } else if (boardIsFull()) {
-                cout << "It's a tie!\n";
+                cout << "\nIt's a tie!\n";
                 break;
             }
         }
@@ -188,10 +201,10 @@ void playGame() {
 
             int win = winner();
             if (win == 2) {
-                cout << "Computer wins!\n";
+                cout << "\nComputer wins!\n";
                 break;
             } else if (boardIsFull()) {
-                cout << "It's a tie!\n";
+                cout << "\nIt's a tie!\n";
                 break;
             }
 
@@ -204,7 +217,7 @@ int main() {
     system ("cls");
     char playAgain;
     do {
-        cout << "\t\t\t\t\tWelcome to Tic-Tac-Toe!\n";
+    cout << BLUE << BOLD  << "\t\t\t\t\t  KDA-TIC-TAC-TOE"<< RESET <<endl;
         cout << "\t\t\t\t\tChoose your marker: ";
         char markerP1;
         cin >> markerP1;
