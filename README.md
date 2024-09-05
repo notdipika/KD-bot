@@ -7,7 +7,7 @@ KDA-BOT is a simple personal assistant model programmed in C++. It includes user
 
 - [Dipika Chaudhary](https://github.com/notdipika)
 - [Karuna Karki](https://github.com/karkikaruna)
-- [Aarju Gautam](https://github.com/gitsaarju)
+- [Aarju Gautam](https://github.com/aarzugit)
   
 
 ## 📂 File Structures
