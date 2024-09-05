@@ -13,60 +13,60 @@ using namespace std;
 class Calculator {
 public:
     void kdaCalculator() {
-    cout << RED << BOLD << "-----------------------------------------" << RESET << endl;
-    cout << RED << BOLD << "----                                  ---" << RESET << endl;
-    cout << RED << BOLD << "-                  KDA                  -" << RESET << endl;
-    cout << RED << BOLD << "-              CALCULATOR               -" << RESET << endl;
-    cout << RED << BOLD << "---                                   ---" << RESET << endl;
-    cout << RED << BOLD << "-----------------------------------------" << RESET << endl;
-    cout << GREEN << "-      " << "+     |      " << "-      |      " << "*     -" << RESET << endl;
-    cout << GREEN << "-     " << "Add    |   " << "Subtract  |  " << "Multiply  -" << RESET << endl;
-    cout << GREEN << "-----------------------------------------" << RESET << endl;
+    cout << RED << BOLD << "\t\t\t\t\t-----------------------------------------" << RESET << endl;
+    cout << RED << BOLD << "\t\t\t\t\t----                                  ---" << RESET << endl;
+    cout << RED << BOLD << "\t\t\t\t\t-                  KDA                  -" << RESET << endl;
+    cout << RED << BOLD << "\t\t\t\t\t-              CALCULATOR               -" << RESET << endl;
+    cout << RED << BOLD << "\t\t\t\t\t---                                   ---" << RESET << endl;
+    cout << RED << BOLD << "\t\t\t\t\t-----------------------------------------" << RESET << endl;
+    cout << GREEN << "\t\t\t\t\t-      " << "+     |      " << "-      |      " << "*     -" << RESET << endl;
+    cout << GREEN << "\t\t\t\t\t-     " << "Add    |   " << "Subtract  |  " << "Multiply  -" << RESET << endl;
+    cout << GREEN << "\t\t\t\t\t-----------------------------------------" << RESET << endl;
 
-    cout << GREEN << "-      " << "/     |      " << "m      |      " << "L     -" << RESET << endl;
-    cout << GREEN << "-   " << "Divide   |     " << "Mod     |     " << "Log    -" << RESET << endl;
-    cout << GREEN << "-----------------------------------------" << RESET << endl;
+    cout << GREEN << "\t\t\t\t\t-      " << "/     |      " << "m      |      " << "L     -" << RESET << endl;
+    cout << GREEN << "\t\t\t\t\t-   " << "Divide   |     " << "Mod     |     " << "Log    -" << RESET << endl;
+    cout << GREEN << "\t\t\t\t\t-----------------------------------------" << RESET << endl;
 
-    cout << GREEN << "-      " << "S     |      " << "C      |      " << "p     -" << RESET << endl;
-    cout << GREEN << "-    " << "Square  |    " << "Cube     |    " << "Power   -" << RESET << endl;
-    cout << GREEN << "-----------------------------------------" << RESET << endl;
+    cout << GREEN << "\t\t\t\t\t-      " << "S     |      " << "C      |      " << "p     -" << RESET << endl;
+    cout << GREEN << "\t\t\t\t\t-    " << "Square  |    " << "Cube     |    " << "Power   -" << RESET << endl;
+    cout << GREEN << "\t\t\t\t\t-----------------------------------------" << RESET << endl;
 
-    cout << GREEN << "-      " << "s     |      " << "c      |      " << "t     -" << RESET << endl;
-    cout << GREEN << "-     " << "sin    |     " << "cos     |     " << "tan    -" << RESET << endl;
-    cout << GREEN << "-----------------------------------------" << RESET << endl;
+    cout << GREEN << "\t\t\t\t\t-      " << "s     |      " << "c      |      " << "t     -" << RESET << endl;
+    cout << GREEN << "\t\t\t\t\t-     " << "sin    |     " << "cos     |     " << "tan    -" << RESET << endl;
+    cout << GREEN << "\t\t\t\t\t-----------------------------------------" << RESET << endl;
 
-    cout << GREEN << "-      " << "r     |      " << "k      |      " << ".     -" << RESET << endl;
-    cout << GREEN << "-  " << "sq root   |    " << "clear    |    " << "close   -" << RESET << endl;
-    cout << GREEN << "-----------------------------------------" << RESET << endl;
+    cout << GREEN << "\t\t\t\t\t-      " << "r     |      " << "k      |      " << ".     -" << RESET << endl;
+    cout << GREEN << "\t\t\t\t\t-  " << "sq root   |    " << "clear    |    " << "close   -" << RESET << endl;
+    cout << GREEN << "\t\t\t\t\t-----------------------------------------" << RESET << endl;
     }
 
     void displayOutput(double answer) {
-    cout << RED << BOLD << "-----------------------------------------" << RESET << endl;
-    cout << RED << BOLD << "----                     ----------------" << RESET << endl;
-    cout << RED << BOLD << "-       Your             |     " << RESET << endl;
-    cout << RED << BOLD << "-       answer is:       |  " << GREEN << answer << RESET << endl;
-    cout << RED << BOLD << "---                      ----------------" << RESET << endl;
-    cout << RED << BOLD << "-----------------------------------------" << RESET << endl;
+    cout << RED << BOLD << "\t\t\t\t\t-----------------------------------------" << RESET << endl;
+    cout << RED << BOLD << "\t\t\t\t\t----                     ----------------" << RESET << endl;
+    cout << RED << BOLD << "\t\t\t\t\t-       Your             |     " << RESET << endl;
+    cout << RED << BOLD << "\t\t\t\t\t-       answer is:       |  " << GREEN << answer << RESET << endl;
+    cout << RED << BOLD << "\t\t\t\t\t---                      ----------------" << RESET << endl;
+    cout << RED << BOLD << "\t\t\t\t\t-----------------------------------------" << RESET << endl;
 
-    cout << GREEN << "-      " << "+     |      " << "-" << "      |      " << "*" << "     -" << RESET << endl;
-    cout << GREEN << "-     " << "Add    |    " << "Minus    |  " << "Multiply  -" << RESET << endl;
-    cout << GREEN << "-----------------------------------------" << RESET << endl;
+    cout << GREEN << "\t\t\t\t\t-      " << "+     |      " << "-" << "      |      " << "*" << "     -" << RESET << endl;
+    cout << GREEN << "\t\t\t\t\t-     " << "Add    |    " << "Minus    |  " << "Multiply  -" << RESET << endl;
+    cout << GREEN << "\t\t\t\t\t-----------------------------------------" << RESET << endl;
 
-    cout << GREEN << "-      " << "/     |      " << "m" << "      |      " << "L" << "     -" << RESET << endl;
-    cout << GREEN << "-   " << "Divide   |     " << "Mod     |     " << "Log    -" << RESET << endl;
-    cout << GREEN << "-----------------------------------------" << RESET << endl;
+    cout << GREEN << "\t\t\t\t\t-      " << "/     |      " << "m" << "      |      " << "L" << "     -" << RESET << endl;
+    cout << GREEN << "\t\t\t\t\t-   " << "Divide   |     " << "Mod     |     " << "Log    -" << RESET << endl;
+    cout << GREEN << "\t\t\t\t\t-----------------------------------------" << RESET << endl;
 
-    cout << GREEN << "-      " << "S     |      " << "C" << "      |      " << "p" << "     -" << RESET << endl;
-    cout << GREEN << "-    " << "Square  |    " << "Cube     |    " << "Power   -" << RESET << endl;
-    cout << GREEN << "-----------------------------------------" << RESET << endl;
+    cout << GREEN << "\t\t\t\t\t-      " << "S     |      " << "C" << "      |      " << "p" << "     -" << RESET << endl;
+    cout << GREEN << "\t\t\t\t\t-    " << "Square  |    " << "Cube     |    " << "Power   -" << RESET << endl;
+    cout << GREEN << "\t\t\t\t\t-----------------------------------------" << RESET << endl;
 
-    cout << GREEN << "-      " << "s     |      " << "c" << "      |      " << "t" << "     -" << RESET << endl;
-    cout << GREEN << "-     " << "sin    |     " << "cos     |     " << "tan    -" << RESET << endl;
-    cout << GREEN << "-----------------------------------------" << RESET << endl;
+    cout << GREEN << "\t\t\t\t\t-      " << "s     |      " << "c" << "      |      " << "t" << "     -" << RESET << endl;
+    cout << GREEN << "\t\t\t\t\t-     " << "sin    |     " << "cos     |     " << "tan    -" << RESET << endl;
+    cout << GREEN << "\t\t\t\t\t-----------------------------------------" << RESET << endl;
 
-    cout << GREEN << "-      " << "r     |      " << "k" << "      |      " << "." << "     -" << RESET << endl;
-    cout << GREEN << "-  " << "sq root   |    " << "clear    |    " << "close   -" << RESET << endl;
-    cout << GREEN << "-----------------------------------------" << RESET << endl;
+    cout << GREEN << "\t\t\t\t\t-      " << "r     |      " << "k" << "      |      " << "." << "     -" << RESET << endl;
+    cout << GREEN << "\t\t\t\t\t-  " << "sq root   |    " << "clear    |    " << "close   -" << RESET << endl;
+    cout << GREEN << "\t\t\t\t\t-----------------------------------------" << RESET << endl;
 
     }
 
